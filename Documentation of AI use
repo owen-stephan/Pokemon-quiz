@@ -1,6 +1,6 @@
 AI chat to make the program 
 
-promt 1 
+prompt 1 
 please make a python code that follows the provided constraints&#x20;
 
 - At least 7 routes.
@@ -89,7 +89,7 @@ The code uses a nested recursive function to search Pokémon evolution chains an
 
 **My recommendation:** Keep the comments in the submitted version. They explain how the more complicated sections work and make it easier to demonstrate that you understand your implementation.
 
-promt 2 
+prompt 2 
 could you expand the quizzes to use the entire Pokémon database similar to the use for the pokedex search instead of only the four currently used
 
 response 2
