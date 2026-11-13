@@ -147,17 +147,14 @@ jobs:
           # uvx gives Drafter its own disposable environment. If the student's
           # project has requirements.txt, layer those packages into the same
           # environment so imports needed while compiling can succeed.
-          DRAFTER_RUN=(uvx --from "$DRAFTER_SPEC")
+          DRAFTER_RUN=(uvx --with requests --from "$DRAFTER_SPEC")
           if [[ -f requirements.txt ]]; then
-            # The workflow controls the Drafter major version. Ignore any
-            # Drafter pin in a legacy requirements.txt, but preserve the
-            # student's actual project dependencies.
-            FILTERED_REQUIREMENTS=".drafter-student-requirements.txt"
-            trap 'rm -f "$FILTERED_REQUIREMENTS"' EXIT
-            grep -Eiv '^[[:space:]]*drafter([[:space:]<>=!~@;]|$)' requirements.txt > "$FILTERED_REQUIREMENTS" || true
-            if [[ -s "$FILTERED_REQUIREMENTS" ]]; then
-              DRAFTER_RUN+=(--with-requirements "$FILTERED_REQUIREMENTS")
-            fi
+              FILTERED_REQUIREMENTS=".drafter-student-requirements.txt"
+              trap 'rm -f "$FILTERED_REQUIREMENTS"' EXIT
+              grep -Eiv '^[[:space:]]*drafter([[:space:]<>=!~@;]|$)' requirements.txt > "$FILTERED_REQUIREMENTS" || true
+              if [[ -s "$FILTERED_REQUIREMENTS" ]]; then
+                  DRAFTER_RUN+=(--with-requirements "$FILTERED_REQUIREMENTS")
+              fi
           fi
 
           DRAFTER_RUN+=(
